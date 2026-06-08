@@ -4,6 +4,7 @@ Django settings for log_compta_backend project.
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -61,16 +62,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'log_compta_backend.wsgi.application'
 
-# Database - PostgreSQL pour Render, PostgreSQL local sinon
+# Database - PostgreSQL pour Render (via DATABASE_URL) ou PostgreSQL local sinon
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'log_compta_db',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/log_compta_db')
 }
 
 # Password validation
